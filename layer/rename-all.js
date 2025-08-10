@@ -6,7 +6,7 @@ function renameAllLayers(layerContainer) {
             renameAllLayers(layer);
         } else {
             // Regular layer
-            layer.name = "_a_,33";
+            layer.name = "_a_" + (i + 1) + ",25";
         }
     }
 }

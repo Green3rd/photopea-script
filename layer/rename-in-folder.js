@@ -1,14 +1,15 @@
-function renameAllLayersUnderFolder(layerContainer, folderName) {
+const folderName = "heart2"
+const animationTime = "50"
+
+function renameAllLayersUnderFolder(layerContainer) {
     for (let i = 0; i < layerContainer.layers.length; i++) {
         let layer = layerContainer.layers[i];
 
         if (layer.layers && layer.layers.length > 0) {
             if (layer.name === folderName) {
-                // Found the 'valentine' folder, rename its child layers
                 renameAllLayers(layer);
             } else {
-                // Recurse into other folders in case 'valentine' is nested
-                renameAllLayersInValentine(layer);
+                renameAllLayersUnderFolder(layer);
             }
         }
     }
@@ -21,13 +22,12 @@ function renameAllLayers(layerContainer) {
             // Recurse into subgroups if any
             renameAllLayers(layer);
         } else {
-            // Rename individual layer
-            layer.name = "_a_" + i + ",50";
+            layer.name = "_a_" + (i + 1) + "," + animationTime;
         }
     }
 }
 if (app.documents.length > 0) {
-    renameAllLayersUnderFolder(app.activeDocument, "valentine1");
+    renameAllLayersUnderFolder(app.activeDocument);
     alert("All layers renamed");
 } else {
     alert("No document open.");
